@@ -13,8 +13,11 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import org.usfirst.frc.team2557.robot.commands.*;
+import org.usfirst.frc.team2557.robot.subsystems.ArmUp;
+import org.usfirst.frc.team2557.robot.subsystems.CatapultSub;
 import org.usfirst.frc.team2557.robot.subsystems.DriveSubsystem;
 import org.usfirst.frc.team2557.robot.subsystems.ExampleSubsystem;
+import org.usfirst.frc.team2557.robot.subsystems.IntakeSub;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -28,11 +31,17 @@ public class Robot extends TimedRobot {
 			= new ExampleSubsystem();
 	public static OI m_oi;
 	
+	public static CatapultSub catapultSub;
+	public static ArmUp armUp;
+	
 	public static DriveSubsystem driveSubsystem;
+	public static IntakeSub intakeSubsystem;
+	
+	Command driveCommand;
 	
 	Command m_autonomousCommand;
 	SendableChooser<Command> m_chooser = new SendableChooser<>();
-
+	Command Drive;
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
@@ -40,7 +49,13 @@ public class Robot extends TimedRobot {
 	@Override
 	public void robotInit() {
 		RobotMap.init();
+		catapultSub = new CatapultSub();
 		driveSubsystem = new DriveSubsystem();
+		intakeSubsystem = new IntakeSub();
+		armUp = new ArmUp();
+//		DriveCommand = new driveCommand();
+		
+		
 		m_oi = new OI();
 		m_chooser.addDefault("Default Auto", new driveCommand());
 		// chooser.addObject("My Auto", new MyAutoCommand());

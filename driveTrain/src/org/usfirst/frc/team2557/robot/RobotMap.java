@@ -20,27 +20,43 @@ import edu.wpi.first.wpilibj.drive.DifferentialDrive;
  */
 //Step 1: declare motors, then speed controller groups, then drive
 //Step 2: initiate motors, group, drive
-public class RobotMap {
+public class RobotMap {	
+	public static WPI_TalonSRX Arm1;
+	public static WPI_TalonSRX Arm2;
+	public static WPI_TalonSRX Catapult;
+	
+	public static WPI_TalonSRX intakeMotor;
 	public static WPI_TalonSRX thing1;
 	public static WPI_TalonSRX thing2;
 	public static WPI_TalonSRX thing3;
 	public static WPI_TalonSRX thing4;
 	
+	public static SpeedControllerGroup arm;
 	public static SpeedControllerGroup Left;
 	public static SpeedControllerGroup Right;
 	
 	public static DifferentialDrive Drive;
 	
 	public static void init() {
+		Arm2 = new WPI_TalonSRX(3);
+		Arm1 = new WPI_TalonSRX(2);
+		
+		Catapult = new WPI_TalonSRX(1);
+		
+		intakeMotor = new WPI_TalonSRX(4);
+		
 		thing1 = new WPI_TalonSRX(7);
 		thing2 = new WPI_TalonSRX(6);
 		thing3 = new WPI_TalonSRX(8);
 		thing4 = new WPI_TalonSRX(5);
 
+		arm = new SpeedControllerGroup(Arm1, Arm2);
 		Left = new SpeedControllerGroup(thing1,thing2);
 		Right = new SpeedControllerGroup(thing3,thing4);
 		
 		Drive = new DifferentialDrive(Left,Right);
+		
+		Drive.setSafetyEnabled(false);
 	}
 	
 }

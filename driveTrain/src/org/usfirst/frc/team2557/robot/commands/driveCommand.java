@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
 public class driveCommand extends Command {
 
     public driveCommand() {
-    	
+    	requires(Robot.driveSubsystem);
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     }
@@ -21,7 +21,8 @@ public class driveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.driveSubsystem.forward();
+//    	Robot.driveSubsystem.forward();
+    	Robot.driveSubsystem.merp();
     	
     }
 
